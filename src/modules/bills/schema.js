@@ -25,6 +25,10 @@ const Bill = sequelize.define("bill", {
         type: DataTypes.ENUM("open", "closed"),
         defaultValue: "open",
         allowNull: false
+    },
+    bill_total: {
+        type: DataTypes.FLOAT,
+        allowNull: false
     }
 }, {timestamps: true});
 
