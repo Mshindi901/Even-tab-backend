@@ -12,6 +12,9 @@ export const add_participant = async (req, res) => {
         if(!bill) {
             return res.status(404).json({success: false, message: 'Bill not found'});
         };
+        if(bill.status === 'closed') {
+            return res.status(400).json({success: false, message: 'Cannot add participant to a closed bill'});
+        };
         const participant = await Participant.create({bill_id: bill.id, name, amount_paid});
         return res.status(201).json({success: true, message: 'Participant added successfully'});
         } catch (error) {
