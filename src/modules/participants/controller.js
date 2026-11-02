@@ -80,7 +80,7 @@ export const calculate_participants_bill_balance = async (req, res) => {
         const bill_total = bill.bill_total;
         const average_amount = bill_total / participants.length;
         for (const participant of participants) {
-            const balace = average_amount - participant.amount_paid;
+            const balace = participant.amount_paid - average_amount;
             await participant.update({balance: balace});
         };
         return res.status(200).json({success: true, message: 'Participants bill balance calculated successfully'});
