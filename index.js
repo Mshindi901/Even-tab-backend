@@ -11,7 +11,7 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
-app.use(cors({origin: 'https://even-tab-frontend.vercel.app/'}))
+app.use(cors({origin: 'https://even-tab-frontend.vercel.app'}))
 
 app.use('/api', billRoutes);
 app.use('/api', participantRoutes);
