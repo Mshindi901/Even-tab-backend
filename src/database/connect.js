@@ -4,7 +4,7 @@ const connectDB = async () => {
     try {
         await sequelize.authenticate();
         console.log('Database connectedsuccessfully.');
-        await sequelize.sync({force: true});
+        await sequelize.sync({alter: true});
         console.log('Models synchronized successfully.');
         return sequelize;
     } catch (error) {

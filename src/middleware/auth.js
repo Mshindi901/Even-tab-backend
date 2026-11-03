@@ -1,17 +1,19 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
+dotenv.config();
+
 export const authenticate = (req, res, next) => {
     try {
         const authHeader = req.headers.authorization;
 
-        if (!authHeader) {
+        if (!authHeader || !authHeader.startsWith("Bearer ")) {
             return res.status(401).json({
                 message: "Authentication required"
             });
         }
 
-        const token = authHeader.split(" ")[1];
+        const token = authHeader.slice(7).trim();
 
         if (!token) {
             return res.status(401).json({
@@ -24,7 +26,10 @@ export const authenticate = (req, res, next) => {
             process.env.JWT_SECRET
         );
 
-        req.user = decoded;
+        req.user = {
+            ...decoded,
+            id: decoded.id || decoded.user_id
+        };
 
         next();
 
