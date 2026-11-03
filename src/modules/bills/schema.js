@@ -8,6 +8,18 @@ const Bill = sequelize.define("bill", {
         primaryKey: true,
         allowNull: false
     },
+    user_id: {
+        type: DataTypes.UUID,
+        references: {
+            model: "users",
+            key: "id"
+        },
+        allowNull: false
+    },
+    description: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     title: {
         type: DataTypes.STRING,
         allowNull: false
